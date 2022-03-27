@@ -29,16 +29,15 @@ public class CsoundUnityHRTF : MonoBehaviour
 
     private IEnumerator coroutine;
 
-    public int[] noteQuantize = { 60, 62, 64, 67, 69, 71 };
+    public int[] noteQuantize = { 60, 62, 64, 67, 69, 71 }; //array of notes played
     public int[] randOctave = { 0, -12, 7, -7 };
 
-    // Start is called before the first frame update
     void Start()
     { 
 
         csound = GetComponent<CsoundUnity>();
 
-        csound.SetStringChannel("CsoundFiles", Application.dataPath + "/CsoundFiles");
+        csound.SetStringChannel("CsoundFiles", Application.dataPath + "/CsoundFiles"); //route .dat file path to be received by csound
         print("CsoundFiles" + Application.dataPath + "/CsoundFiles");
 
         StartCoroutine(NoteIncrement());
@@ -49,7 +48,7 @@ public class CsoundUnityHRTF : MonoBehaviour
     private void Update()
     {
         
-        t += 1.0f * Time.deltaTime;
+        t += 1.0f * Time.deltaTime; //smoothly interpolate between positions
 
 
         if (t > 2.0f)
@@ -104,7 +103,7 @@ public class CsoundUnityHRTF : MonoBehaviour
 
     }
 
-    float AzimuthAngle(GameObject cube, GameObject play)
+    float AzimuthAngle(GameObject cube, GameObject play) //calculate azimuth angle
     {
         float azi = Vector3.Angle(play.transform.forward, cube.transform.position - play.transform.position);
 
@@ -118,7 +117,7 @@ public class CsoundUnityHRTF : MonoBehaviour
         return azi;
     }
 
-    float ElevationAngle(GameObject cube, GameObject play)
+    float ElevationAngle(GameObject cube, GameObject play) //calculate elevation angle
     {
         float elev = Vector3.Angle(play.transform.up, cube.transform.position - play.transform.position);
 
